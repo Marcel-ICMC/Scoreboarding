@@ -5,6 +5,8 @@
  */
 package scoreboarding;
 
+import scoreboarding.interfac.interfaci;
+
 /**
  *
  * @author andre
@@ -15,6 +17,8 @@ public class Scoreboarding {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        interfaci interfac = new interfaci();
+        interfac.runInterface();
         // TODO code application logic here
     }
     
