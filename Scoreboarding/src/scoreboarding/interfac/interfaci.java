@@ -5,11 +5,14 @@
  */
 package scoreboarding.interfac;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import javax.swing.table.DefaultTableModel;
 import scoreboarding.FunctionalUnit;
 import scoreboarding.Instruction;
+import scoreboarding.RRS;
 
 /**
  *
@@ -23,6 +26,13 @@ public class interfaci extends javax.swing.JFrame {
      */
     public interfaci() {
         initComponents();
+        initFus();
+        for (int i=0; i<nRRS; i++) {
+            jComboBox2.addItem("" + (i+1));
+            jComboBox3.addItem("" + (i+1));
+            jComboBox4.addItem("" + (i+1));
+        }
+        jComboBox4.setEnabled(false);
     }
 
     /**
@@ -50,6 +60,10 @@ public class interfaci extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,21 +92,18 @@ public class interfaci extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -145,12 +156,48 @@ public class interfaci extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Proximo Ciclo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Busy", "Op", "Fi", "Fj", "Fj", "Qj", "Qk", "Rj", "Rk"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,6 +206,8 @@ public class interfaci extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,33 +222,31 @@ public class interfaci extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(129, 129, 129))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
-                        .addGap(237, 237, 237)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(524, Short.MAX_VALUE))))
+                                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(448, 448, 448)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(783, 783, 783))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton2))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -223,44 +270,106 @@ public class interfaci extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(184, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     private String operand = "LW";
-    private String rs = "R1";
-    private String rt = "R1";
-    private String rd = "R1";
+    private int rs = 1;
+    private int rt = 1;
+    private int rd = 1;
     private int imm = 0;
-    private Queue<Instruction> instructions = new LinkedList<>();
+    private Queue<Instruction> instructions = new LinkedList<Instruction>();
     private int count_instruction = 0;
-    private FunctionalUnit[] fus = new FunctionalUnit[4];
-    private String[] RRS = new String[10];
-    private int clock;
+    private int clock = 0;
     private int counter = 0;
+    private int nLoadStore = 2;
+    private int nArithmetic = 2;
+    private FunctionalUnit[] fus = new FunctionalUnit[nLoadStore + nArithmetic];
+    private int nRRS = 10;
+    private RRS[] rrs = new RRS[nRRS];
     
     private void initFus(){
-        fus[0] = new FunctionalUnit("Load/Store1");
-        fus[1] = new FunctionalUnit("Load/Store2");
-        fus[2] = new FunctionalUnit("Arithmatic1");
-        fus[3] = new FunctionalUnit("Arithmatic2");
+        int i=0;
+        for (i=0; i<nLoadStore; i++) {
+            fus[i] = new FunctionalUnit("Load/Store");
+            insertLinha(jTable3, new Object[]{"Load/Store " + (i+1), null, "", null,null,null, "","",null,null});
+        }
+        for (; i<nArithmetic + nLoadStore; i++) {
+            fus[i] = new FunctionalUnit("Arithmatic");
+            insertLinha(jTable3, new Object[]{"Arithmatic " + (i+1 - nLoadStore), null, "", null,null,null, "","", null,null});
+        }
+        for (int j=0; j<nRRS; j++) {
+            rrs[j] = new RRS("R" + (j+1));
+            System.out.println(rrs[j].getName());
+        }
+        //fus[0] = new FunctionalUnit("Load/Store");
+        //fus[1] = new FunctionalUnit("Load/Store");
+        //fus[2] = new FunctionalUnit("Arithmatic");
+        //fus[3] = new FunctionalUnit("Arithmatic");
     }
     
     private void computeScoreboarding(){
-        Instruction instruction = instructions.element();
+        clock += 1;
+        Instruction instruction = instructions.peek();
         if (instruction == null) return;
         
         if (instruction.getUnit().equals("Load/Store")) {
-            if (!fus[0].isBusy()) {
-                
-            } else if (!fus[1].isBusy()) {
-                
+            for (int i=0; i<nLoadStore; i++) {
+                if (!fus[i].isBusy()) {
+
+                    instruction.setIssue(clock);
+                    fus[i].setBusy(true);
+                    fus[i].setInstruction(instruction);
+                    fus[i].setFi(instruction.getRs());
+                    System.out.println(fus[i].getInstruction().getRs());
+                    System.out.println(fus[i].getFi());
+                    fus[i].setFj(instruction.getRt());
+                    System.out.println(fus[i].getInstruction().getRt());
+                    System.out.println(fus[i].getFj());
+                    fus[i].setFk(instruction.getImm());
+                    
+                    //conferindo dependencia do fj
+                    if(rrs[fus[i].getFj()].getFus() != null){
+                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
+                        fus[i].setRj(false);
+                    }else{
+                       fus[i].setQj(null);
+                       fus[i].setRj(true);
+                    }
+                    
+                    //conferindo dependencia do fk
+                    if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
+                        fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
+                        fus[i].setRk(false);
+                    }else{
+                        fus[i].setQk(null);
+                        fus[i].setRk(true);
+                    }
+                    
+                    //conferindo se pode escrever no Fi
+                    if(rrs[fus[i].getFi()].getFus() == null){
+                        rrs[fus[i].getFi()].setFus(fus[i]);
+                    }
+                    
+                    insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRd(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), 
+                        fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
+                    break;
+                }
             }
+            
         } else {
             if (!fus[2].isBusy()) {
                 
@@ -268,12 +377,67 @@ public class interfaci extends javax.swing.JFrame {
                 
             }
         }
+        
+        for (int i=0; i < nLoadStore + nArithmetic; i++) {
+                    if (fus[i].getInstruction() == null) continue;
+            //conferindo dependencia do fj
+                    if(rrs[fus[i].getFj()].getFus() != null){
+                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
+                        fus[i].setRj(false);
+                    }else{
+                       fus[i].setQj(null);
+                       fus[i].setRj(true);
+                    }
+                    
+                    //conferindo dependencia do fk
+                    if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
+                        fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
+                        fus[i].setRk(false);
+                    }else{
+                        fus[i].setQk(null);
+                        fus[i].setRk(true);
+                    }
+                    
+                    //conferindo se pode escrever no Fi
+                    if(rrs[fus[i].getFi()].getFus() == null){
+                        rrs[fus[i].getFi()].setFus(fus[i]);
+                    }
+            
+            if (fus[i].getInstruction().getRead_operand() == -1 && fus[i].isRj() && fus[i].isRk()) {
+                fus[i].setRj(false);
+                fus[i].setRk(false);
+                fus[i].getInstruction().setRead_operand(clock + 1);
+                fus[i].getInstruction().setExecution_complete(clock + 2);
+            }
+            
+            ArrayList<Instruction> aux = new ArrayList<Instruction>(instructions);
+
+            if (fus[i].getInstruction().getWrite_result() == -1) {
+                int j=0;
+                for (j=0; j<i; j++) {
+                    if ((fus[i].getInstruction().getRd() == aux.get(j).getRs() || fus[i].getInstruction().getRd() == aux.get(j).getRt()) && aux.get(j).getRead_operand() == -1) {
+                        break;
+                    }
+                }
+                if (j==i) {
+                    fus[i].getInstruction().setWrite_result(clock + 1);
+                }
+            }
+        }
+        
     }
     
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         operand = (String) jComboBox1.getSelectedItem();
         System.out.println(operand);
+        if (!"LW".equals(operand) && !"SW".equals(operand) && !"ADDI".equals(operand)) {
+            jComboBox4.setEnabled(true);
+            textField1.setEnabled(false);
+        } else {
+            jComboBox4.setEnabled(false);
+            textField1.setEnabled(true);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
@@ -287,18 +451,18 @@ public class interfaci extends javax.swing.JFrame {
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
-        rs = (String) jComboBox2.getSelectedItem();
+        rs = Integer.parseInt((String) jComboBox2.getSelectedItem());
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
-        rt = (String) jComboBox3.getSelectedItem();
+        rt = Integer.parseInt((String) jComboBox3.getSelectedItem());
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
         if (!"LW".equals(operand) && !"SW".equals(operand) && !"ADDI".equals(operand)) {
-            rd = (String) jComboBox4.getSelectedItem();
+            rd = Integer.parseInt((String) jComboBox4.getSelectedItem());
         } else {
             jComboBox4.setEnabled(false);
         }
@@ -331,6 +495,7 @@ public class interfaci extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        computeScoreboarding();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -384,8 +549,12 @@ public class interfaci extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
     DefaultTableModel model;

@@ -13,23 +13,24 @@ public class FunctionalUnit {
     private String name;
     private boolean busy;
     private String operand;
-    private String Fi;
-    private Object Fj;
-    private Object Fk;
+    private int Fi;
+    private int Fk;
     private String Qj;
     private String Qk;
     private boolean Rj;
     private boolean Rk;
-    private String type;
+    private int Fj;
+    //private String type;
     private Instruction instruction;
+    
     
     public FunctionalUnit(String name) {
         this.name = name;
-        if("Load/Store1".equals(name) || "Load/Store2".equals(name)){
-            type = "Load/Store";
+        /*        if("Load/Store1".equals(name) || "Load/Store2".equals(name)){
+        type = "Load/Store";
         } else{
-            type = "Arithmetic";
-        }
+        type = "Arithmetic";
+        }*/
         this.busy = false;
         this.Rj = false;
         this.Rk = false;
@@ -55,15 +56,15 @@ public class FunctionalUnit {
         return operand;
     }
 
-    public String getFi() {
+    public int getFi() {
         return Fi;
     }
 
-    public Object getFj() {
+    public int getFj() {
         return Fj;
     }
 
-    public Object getFk() {
+    public int getFk() {
         return Fk;
     }
 
@@ -91,15 +92,20 @@ public class FunctionalUnit {
         this.operand = operand;
     }
 
-    public void setFi(String Fi) {
+    public void setFi(int Fi) {
         this.Fi = Fi;
     }
 
-    public void setFj(Object Fj) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFj(int Fj) {
         this.Fj = Fj;
     }
 
-    public void setFk(Object Fk) {
+
+    public void setFk(int Fk) {
         this.Fk = Fk;
     }
 

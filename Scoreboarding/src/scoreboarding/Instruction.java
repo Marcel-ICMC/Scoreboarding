@@ -14,22 +14,26 @@ public class Instruction {
     private String type;
     private String unit;
     private String operand;
-    private String rs;
-    private String rt;
-    private String rd;
+    private int rs;
+    private int rt;
+    private int rd;
     private int imm;
     private int issue;
     private int read_operand;
     private int execution_complete;
     private int write_result;
+    
 
-    public Instruction(String operand, String rs, String rt, String rd, int imm, String unit) {
+    public Instruction(String operand, int rs, int rt, int rd, int imm, String unit) {
         this.operand = operand;
         this.rs = rs;
         this.rt = rt;
         this.rd = rd;
         this.imm = imm;
         this.issue = -1;
+        this.read_operand = -1;
+        this.execution_complete = -1;
+        this.write_result = -1;
         this.unit = unit;
         
         if ("LW".equals(operand) || "SW".equals(operand) || "ADDI".equals(operand)) {
@@ -83,15 +87,15 @@ public class Instruction {
         return operand;
     }
 
-    public String getRs() {
+    public int getRs() {
         return rs;
     }
 
-    public String getRt() {
+    public int getRt() {
         return rt;
     }
 
-    public String getRd() {
+    public int getRd() {
         return rd;
     }
 
