@@ -317,6 +317,7 @@ public class interfaci extends javax.swing.JFrame {
             insertLinha(jTable2, new Object[]{operand, rs, rt, rd});
             instructions.add(new Instruction(operand, rs, rt, rd, imm, "Arithmetic"));
         }
+        jTable2.scrollRectToVisible(jTable2.getCellRect(jTable2.getRowCount()-1, 0, true));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textField1FocusLost
