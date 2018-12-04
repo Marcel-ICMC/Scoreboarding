@@ -13,10 +13,20 @@ public class RRS {
     
     private FunctionalUnit fus;
     private String name;
+    private boolean visited;
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
     public RRS(String name) {
         this.name = name;
         this.fus = null;
+        this.visited = false;
     }
 
     public FunctionalUnit getFus() {

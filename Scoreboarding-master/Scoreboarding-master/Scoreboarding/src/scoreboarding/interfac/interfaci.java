@@ -223,12 +223,11 @@ public class interfaci extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(448, 448, 448)
@@ -246,26 +245,23 @@ public class interfaci extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(2, 2, 2)
                         .addComponent(jButton1)
                         .addGap(28, 28, 28)
@@ -300,15 +296,27 @@ public class interfaci extends javax.swing.JFrame {
     private FunctionalUnit[] fus = new FunctionalUnit[nLoadStore + nArithmetic];
     private int nRRS = 10;
     private RRS[] rrs = new RRS[nRRS];
+    private boolean WRdone = false;
+    private boolean clean = false;
+    private int aux = -1;
+    
+    /* private void createTable() {
+    for (int i=0; i<nLoadStore + nArithmetic; i++) {
+    if (fus[i].getInstruction() != null) {
+    insertLinha(jTable1, new Object[]{fus[i].getName(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), fus[i].getInstruction().getRd(),
+    fus[i].getInstruction().getIssue(), });
+    }
+    }
+    }*/
     
     private void initFus(){
         int i=0;
         for (i=0; i<nLoadStore; i++) {
-            fus[i] = new FunctionalUnit("Load/Store");
+            fus[i] = new FunctionalUnit("Load/Store" + i);
             insertLinha(jTable3, new Object[]{"Load/Store " + (i+1), null, "", null,null,null, "","",null,null});
         }
         for (; i<nArithmetic + nLoadStore; i++) {
-            fus[i] = new FunctionalUnit("Arithmatic");
+            fus[i] = new FunctionalUnit("Arithmatic" + (i - nLoadStore));
             insertLinha(jTable3, new Object[]{"Arithmatic " + (i+1 - nLoadStore), null, "", null,null,null, "","", null,null});
         }
         for (int j=0; j<nRRS; j++) {
@@ -321,191 +329,226 @@ public class interfaci extends javax.swing.JFrame {
         //fus[3] = new FunctionalUnit("Arithmatic");
     }
     
+    private void Fus_clean(int i) {
+        fus[i].setBusy(false);
+        fus[i].setQj(null);
+        fus[i].setQk(null);
+        fus[i].setRj(false);
+        fus[i].setRk(false);
+        fus[i].setInstruction(null);
+        fus[i].setRj(false);
+        fus[i].setRk(false);
+        fus[i].setFi(-1);
+        fus[i].setFj(-1);
+        fus[i].setFk(-1);
+    }
+
     private void computeScoreboarding(){
-        Instruction instruction = instructions.peek();
-        if (instruction == null) return;
-        instructions.remove();
+        clock += 1;
         
+        if (clean == true) {
+            Fus_clean(aux);
+            clean = false;
+            aux = -1;
+        }
         
-        // Issue (Insercao)
-        if (instruction.getUnit().equals("Load/Store")) {
-            for (int i=0; i<nLoadStore; i++) {
-                if (!fus[i].isBusy() && rrs[fus[i].getFi()].getFus() == null) {
-
-                    instruction.setIssue(clock);
-                    fus[i].setBusy(true);
-                    fus[i].setInstruction(instruction);
-                    fus[i].setFi(instruction.getRs());
-                    fus[i].setFj(instruction.getRt());
-                    fus[i].setFk(instruction.getImm());
-                    
-                    //conferindo dependencia do fj
-                    if(rrs[fus[i].getFj()].getFus() != null){
-                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
-                        fus[i].setRj(false);
-                    } else {
-                        fus[i].setQj(null);
-                        fus[i].setRj(true);
-                    }
-                    
-                    
-                    //!fus[i].getInstruction().getType().equals("I") && 
-                    
-                    //conferindo dependencia do fk
-                    if(rrs[fus[i].getFk()].getFus() !=  null){ //tem algo, entao entre
-                        if (!fus[i].getInstruction().getType().equals("I")) {   // verifica se nao for imm
-                            fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());   
-                            fus[i].setRk(false);
-                        } else {    // caso seja imm, sera sempre true
-                            fus[i].setQk(null);
-                            fus[i].setRk(true);
-                        }
-                    }else{
-                        fus[i].setQk(null);
-                        fus[i].setRk(true);
-                    }
-                    
-                    //conferindo se pode escrever no Fi
-                    if (fus[i].getInstruction().getOperand().equals("LW")) {
-                        if(rrs[fus[i].getFi()].getFus() == null){
-                            rrs[fus[i].getFi()].setFus(fus[i]);
+        for (int i=0; i < nLoadStore + nArithmetic; i++) {
+            if (fus[i].getInstruction() != null) {
+                
+                // Read_Operand
+                if (fus[i].isDp() == false) {
+                    if(fus[i].getInstruction().getIssue() != -1 && fus[i].getInstruction().getRead_operand() == -1){
+                        if (fus[i].isRj() && fus[i].isRk()) {
+                            if (fus[i].getInstruction().getUnit().equals("Load/Store") && i < 2) {
+                                jTable1.setValueAt(clock, fus[i].getInstruction().getLine(), 5);
+                                fus[i].getInstruction().setRead_operand(clock);
+                                fus[i].setRj(false);
+                                fus[i].setRk(false);
+                            } else if (fus[i].getInstruction().getUnit().equals("Arithmetic") && i >= 2) {
+                                jTable1.setValueAt(clock, fus[i].getInstruction().getLine(), 5);
+                                fus[i].getInstruction().setRead_operand(clock);
+                                fus[i].setRj(false);
+                                fus[i].setRk(false);
+                            }
+                            rrs[fus[i].getFi()].setVisited(true);
+                        continue;
                         }
                     }
-                    
-                    insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRd(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getImm(), 
-                    fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
-                    break;
+                } else {
+                    fus[i].setDp(false);
+                    continue;
                 }
-            }
-            
-        } else {
-            for (int i=nLoadStore; i<nArithmetic + nLoadStore; i++) {
-                if (!fus[i].isBusy()) {
 
-                    instruction.setIssue(clock);
-                    fus[i].setBusy(true);
-                    fus[i].setInstruction(instruction);
-                    fus[i].setFi(instruction.getRs());
-                    fus[i].setFj(instruction.getRt());
-                    if (fus[i].getInstruction().getType().equals("R")) {
-                        fus[i].setFk(instruction.getRd());
-                    } else {
-                        fus[i].setFk(instruction.getImm());
+                
+                
+                // Execution_Complete
+                if(fus[i].getInstruction().getRead_operand() != -1 && fus[i].getInstruction().getExecution_complete() == -1) {
+                        jTable1.setValueAt(clock, fus[i].getInstruction().getLine(), 6); 
+                        fus[i].getInstruction().setExecution_complete(clock);
+                        continue;
+                }
+                
+           
+            
+            // Write Result
+                if (fus[i].getInstruction().getExecution_complete() != -1 && fus[i].getInstruction().getWrite_result() == -1) {
+                    int j=0;
+                    for (j=0; j<nLoadStore + nArithmetic; j++) {
+                        if (i != j) {
+                            if (!((fus[i].getFi() != fus[j].getFj() || !fus[j].isRj()) && (fus[i].getFi() != fus[j].getFk() || !fus[j].isRk()))) {
+                                break;
+                            }
+
+                        }
+                    }
+
+                    if (j==nLoadStore + nArithmetic) {
+
+                        fus[i].getInstruction().setWrite_result(clock);
+                        for (int k=0; k<nLoadStore + nArithmetic; k++) {
+                                System.out.println(fus[k].getQk());
+                                System.out.println(fus[i].getName());
+                            if (i != k ) {
+                                if (fus[k].getQj() != null && fus[k].getQj().equals(fus[i].getName())) {
+                                    fus[k].setRj(true);
+                                    fus[k].setQj(null);
+                                    fus[k].setDp(true);
+                                }
+
+                                if (fus[k].getQk() != null && fus[k].getQk().equals(fus[i].getName())) {
+                                    fus[k].setRk(true);
+                                    fus[k].setQk(null);
+                                    fus[k].setDp(true);
+                                }
+                            }
+                        }
+                       
+                            rrs[fus[i].getFi()].setVisited(true);
+                        
+                        rrs[fus[i].getFi()].setFus(null);
+                        fus[i].setBusy(false);
+                        jTable1.setValueAt(clock, fus[i].getInstruction().getLine(), 7);
+                        clean = true;
+                        aux = i;
                     }
                     
-                    //conferindo dependencia do fj
-                    if(rrs[fus[i].getFj()].getFus() != null){
-                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
-                        fus[i].setRj(false);
-                    }else{
-                       fus[i].setQj(null);
-                       fus[i].setRj(true);
-                    }
-                    
-                    //conferindo dependencia do fk
-                    if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
-                        fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
-                        fus[i].setRk(false);
-                    }else{
-                        fus[i].setQk(null);
-                        fus[i].setRk(true);
-                    }
-                    
-                    //conferindo se pode escrever no Fi
-                    if(rrs[fus[i].getFi()].getFus() == null){
-                        rrs[fus[i].getFi()].setFus(fus[i]);
-                    }
-                    
-                    if (fus[i].getInstruction().getType().equals("R")) {
-                        insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRd(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), 
-                        fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
-                        break;
-                    } else  {
-                        insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRd(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getImm(), 
-                        fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
-                        break;
-                    }
                 }
             }
         }
         
-        clock += 1;
+        Instruction instruction = instructions.peek();
+        if (instruction == null) return;
         
-        for (int i=0; i < nLoadStore + nArithmetic; i++) {
-            if (fus[i].getInstruction() != null) {
+        // Issue (Insercao)
 
-                System.out.print(i+ ": " + fus[i].isRj());
-                System.out.print(i+ ": " + fus[i].isRk());
-                if (fus[i].isRj() && fus[i].isRk()) {
-                    jTable1.setValueAt(clock, i, 5);
-                    fus[i].getInstruction().setRead_operand(clock);
-                    fus[i].setRj(false);
-                    fus[i].setRk(false);
-                    System.out.print(clock);
+        if (instruction != null && instruction.getIssue() == -1) {
+            if (rrs[instruction.getRs()].isVisited() == false) {
+                if (instruction.getUnit().equals("Load/Store")) {
+                    for (int i=0; i<nLoadStore; i++) {
+                            if (!fus[i].isBusy()) {
+                                if (rrs[instruction.getRs()].getFus() == null) {
+                                    instruction.setIssue(clock);
+                                    fus[i].setBusy(true);
+                                    fus[i].setInstruction(instruction);
+                                    fus[i].setFi(instruction.getRs());
+                                    fus[i].setFj(instruction.getRt());
+                                    fus[i].setFk(instruction.getImm());
+                                    fus[i].getInstruction().setLine(jTable1.getModel().getRowCount());
+
+                                    //conferindo dependencia do fj
+                                    if(rrs[fus[i].getFj()].getFus() != null){
+                                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
+                                        fus[i].setRj(false);
+                                    } else {
+                                        fus[i].setQj(null);
+                                        fus[i].setRj(true);
+                                    }
+
+
+                                    //!fus[i].getInstruction().getType().equals("I") && 
+
+
+                                    fus[i].setQk(null);
+                                    fus[i].setRk(true);
+
+                                    //conferindo se pode escrever no Fi
+                                    if (fus[i].getInstruction().getOperand().equals("LW")) {
+                                        //if(rrs[fus[i].getFi()].getFus() == null){
+                                            rrs[fus[i].getFi()].setFus(fus[i]);
+                                        //}
+                                    }
+
+                                    insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), fus[i].getInstruction().getImm(), 
+                                    fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
+                                    instructions.remove();
+                                    break;
+                                }
+                            }
+
+                    }
+
+                } else if(instruction.getIssue() == -1) {
+                    for (int i=nLoadStore; i<nArithmetic + nLoadStore; i++) {
+                            if (!fus[i].isBusy()) {
+                                System.out.println("Entrando " + instruction.getRs());
+                                if (rrs[instruction.getRs()].getFus() == null) {
+                                    instruction.setIssue(clock);
+                                    fus[i].setBusy(true);
+                                    fus[i].setInstruction(instruction);
+                                    fus[i].setFi(instruction.getRs());
+                                    fus[i].setFj(instruction.getRt());
+                                    if (fus[i].getInstruction().getType().equals("R")) {
+                                        fus[i].setFk(instruction.getRd());
+                                    } else {
+                                        fus[i].setFk(instruction.getImm());
+                                    }
+                                    fus[i].getInstruction().setLine(jTable1.getModel().getRowCount());
+
+                                    //conferindo dependencia do fj
+                                    if(rrs[fus[i].getFj()].getFus() != null){
+                                        System.out.println("Qj falso");
+                                        fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
+                                        fus[i].setRj(false);
+                                    }else{
+                                        System.out.println("Qj true");
+                                       fus[i].setQj(null);
+                                       fus[i].setRj(true);
+                                    }
+
+                                    //conferindo dependencia do fk
+                                    if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
+                                        fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
+                                        fus[i].setRk(false);
+                                    }else{
+                                        fus[i].setQk(null);
+                                        fus[i].setRk(true);
+                                    }
+
+                                    //conferindo se pode escrever no Fi
+                                    //if(rrs[fus[i].getFi()].getFus() == null){
+                                        rrs[fus[i].getFi()].setFus(fus[i]);
+                                    //}
+
+                                    if (fus[i].getInstruction().getType().equals("R")) {
+                                        insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), fus[i].getInstruction().getRd(), 
+                                        fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
+                                        instructions.remove();
+                                        break;
+                                    } else  {
+                                        insertLinha(jTable1, new Object[]{fus[i].getInstruction().getOperand(), fus[i].getInstruction().getRs(), fus[i].getInstruction().getRt(), fus[i].getInstruction().getImm(), 
+                                        fus[i].getInstruction().getIssue(), fus[i].getInstruction().getRead_operand(), fus[i].getInstruction().getExecution_complete(), fus[i].getInstruction().getWrite_result()});
+                                        instructions.remove();
+                                        break;
+                                    }
+
+                                }
+                            }
+
+                    }
                 }
-/*
-                //conferindo dependencia do fj
-                if(rrs[fus[i].getFj()].getFus() != null){
-                fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
-                fus[i].setRj(false);
-                }else{
-                fus[i].setQj(null);
-                fus[i].setRj(true);
-                }
+            } else {
+                rrs[instruction.getRs()].setVisited(false);
                 
-                if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
-                fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
-                fus[i].setRk(false);
-                } else {
-                fus[i].setQk(null);
-                fus[i].setRk(true);
-                }*/ 
-//            
-            /*                    if (fus[i].getInstruction() == null) continue;
-            //conferindo dependencia do fj
-            if(rrs[fus[i].getFj()].getFus() != null){
-            fus[i].setQj(rrs[fus[i].getFj()].getFus().getName());
-            fus[i].setRj(false);
-            }else{
-            fus[i].setQj(null);
-            fus[i].setRj(true);
-            }
-            
-            //conferindo dependencia do fk
-            if(!fus[i].getInstruction().getType().equals("I") && rrs[fus[i].getFk()].getFus() != null){
-            fus[i].setQk(rrs[fus[i].getFk()].getFus().getName());
-            fus[i].setRk(false);
-            }else{
-            fus[i].setQk(null);
-            fus[i].setRk(true);
-            }
-            
-            //conferindo se pode escrever no Fi
-            if(rrs[fus[i].getFi()].getFus() == null){
-            rrs[fus[i].getFi()].setFus(fus[i]);
-            }
-            
-            if (fus[i].getInstruction().getRead_operand() == -1 && (fus[i].isRj() && fus[i].isRk())) {
-            fus[i].setRj(false);
-            fus[i].setRk(false);
-            fus[i].getInstruction().setRead_operand(clock + 1);
-            fus[i].getInstruction().setExecution_complete(clock + 2);
-            }*/
-           
-            
-            // Write Result
-            /*if (fus[i].getInstruction().getWrite_result() == -1) {
-            int j=0;
-            for (j=0; j<i; j++) {
-            if ((fus[i].getFi() == fus[j].getFj() || fus[i].getFi() == fus[j].getFk()) && !fus[j].isRj() ) {
-            break;
-            }
-            System.out.println("a");
-            }
-            if (j==i) {
-            fus[i].getInstruction().setWrite_result(clock + 1);
-            }
-            }*/
             }
         }
     }

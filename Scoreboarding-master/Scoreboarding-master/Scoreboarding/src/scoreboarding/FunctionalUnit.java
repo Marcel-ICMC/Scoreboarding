@@ -10,6 +10,7 @@ package scoreboarding;
  * @author ICMC
  */
 public class FunctionalUnit {
+    private boolean dp;
     private String name;
     private boolean busy;
     private String operand;
@@ -32,11 +33,27 @@ public class FunctionalUnit {
         type = "Arithmetic";
         }*/
         this.busy = false;
+        this.Qj = null;
+        this.Qk = null;
         this.Rj = false;
         this.Rk = false;
         this.instruction = null;
+        this.Fj = -1;
+        this.Fk = -1;
+        this.Fi = -1;
+        this.dp = false;
     }
 
+    public boolean isDp() {
+        return dp;
+    }
+
+    public void setDp(boolean dp) {
+        this.dp = dp;
+    }
+
+    
+    
     public Instruction getInstruction() {
         return instruction;
     }

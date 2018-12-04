@@ -11,6 +11,7 @@ package scoreboarding;
  */
 public class Instruction {
     
+    private int line;
     private String type;
     private String unit;
     private String operand;
@@ -25,6 +26,7 @@ public class Instruction {
     
 
     public Instruction(String operand, int rs, int rt, int rd, int imm, String unit) {
+        this.line = -1;
         this.operand = operand;
         this.rs = rs;
         this.rt = rt;
@@ -41,6 +43,14 @@ public class Instruction {
         } else {
             this.type = "R";
         }
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
     }
 
     public String getUnit() {
