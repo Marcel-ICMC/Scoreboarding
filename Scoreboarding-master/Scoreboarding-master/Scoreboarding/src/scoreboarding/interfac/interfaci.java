@@ -441,7 +441,7 @@ public class interfaci extends javax.swing.JFrame {
         
         // Issue (Insercao)
 
-        if (instruction != null && instruction.getIssue() == -1) {
+        if (instruction != null && instruction.getIssue() == -1) {        
             if (rrs[instruction.getRs()].isVisited() == false) {
                 if (instruction.getUnit().equals("Load/Store")) {
                     for (int i=0; i<nLoadStore; i++) {
@@ -549,6 +549,7 @@ public class interfaci extends javax.swing.JFrame {
             } else {
                 rrs[instruction.getRs()].setVisited(false);
                 
+            }
             }
         }
     }

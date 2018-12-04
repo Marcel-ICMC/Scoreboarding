@@ -105,6 +105,14 @@ public class Instruction {
         return rt;
     }
 
+    public void setRd(int rd) {
+        this.rd = rd;
+    }
+    
+    public void setRs(int rs) {
+        this.rs = rs;
+    }
+
     public int getRd() {
         return rd;
     }
